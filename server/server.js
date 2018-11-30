@@ -7,6 +7,7 @@ const {ObjectID} = require('mongodb');
 const {mongoose} = require('./db/mongoose');
 const {Todo}     = require('./models/todo');
 const {User}     = require('./models/users');
+const {authenticate} = require('./middleware/authenticate');
 
 
 var app = express();
@@ -121,23 +122,23 @@ app.post('/users', (req, res) => {
   })
 })
 
+// var authenticate = (req, res, next) => {
+//   var token = req.header('x-auth');
+//
+//   User.findByToken(token).then( (user) => {
+//     if(!user){
+//       return Promise.reject();
+//     }
+//
+//     req.user  = user;
+//     req.token = token;
+//     next();
+//   }).catch( (e) => {
+//     res.status(401).send();
+//   })
+// }
 
-var authenticate = (req, res, next) => {
-  var token = req.header('x-auth');
 
-  User.findByToken(token).then( (user) => {
-    if(!user){
-      return Promise.reject();
-    }
-
-    req.user  = user;
-    req.token = token;
-    next();
-  }).catch( (e) => {
-    res.status(401).send();
-  })
-
-}
 
 
 app.get('/users/me', authenticate, (req, res) => {
