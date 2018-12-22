@@ -8,6 +8,8 @@ const {mongoose} = require('./db/mongoose');
 const {Todo}     = require('./models/todo');
 const {User}     = require('./models/users');
 const {authenticate} = require('./middleware/authenticate');
+const config  = require('./config/jwt');
+
 
 
 var app = express();
