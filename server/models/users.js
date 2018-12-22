@@ -84,6 +84,7 @@ UserSchema.pre('save', function(next) {
   }else{
     next();
   }
+  // console.log('mongoose middleware is running');
 })
 
 
